@@ -12,6 +12,7 @@ const dummyContacts = [
 export default function ContactList() {
   // Initializing the contacts state with the dummyContacts array
   const [contacts, setContacts] = useState(dummyContacts);
+  console.log("Contacts: ", contacts)
 
   return (
     <table>
