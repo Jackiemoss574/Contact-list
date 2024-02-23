@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-// Import ContactRow if you're using it to render each contact
+import React, { useState , useEffect } from 'react';
+// Import ContactRow if I am using it to render each contact
 // import ContactRow from './ContactRow';
 
 const dummyContacts = [
@@ -10,6 +10,23 @@ const dummyContacts = [
 
 function ContactList() {
   const [contacts, setContacts] = useState(dummyContacts);
+
+  useEffect(() => {
+    async function fetchContacts() {
+      try {
+        const response = await fetch('https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users');
+        if (!response.ok) throw new Error('Failed to fetch');
+        const data = await response.json();
+        console.log(data); // Test response
+        setContacts(data); // Update state with API data
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchContacts();
+  }, []); // Empty dependency array ensures this runs once on mount
+
 
   console.log("Contacts: ", contacts);
 
